@@ -12,9 +12,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
-
 /// <summary>
 /// Provides programmatic access to <see cref="InputActionAsset" />, <see cref="InputActionMap" />, <see cref="InputAction" /> and <see cref="InputControlScheme" /> instances defined in asset "Assets/Cainos/Pixel Art Top Down - Basic/Script/Player Controls.inputactions".
 /// </summary>
@@ -72,8 +72,10 @@ using UnityEngine.InputSystem.Utilities;
 /// }
 /// </code>
 /// </example>
-public partial class @PlayerControls: IInputActionCollection2, IDisposable
+public partial class @PlayerControls: MonoBehaviour, IInputActionCollection2, IDisposable
 {
+    public GameObject DustEffect; // Unity içinden buraya prefab'ý sürükleyeceðiz
+    public Transform feetPos;     // Tozun çýkacaðý yer (Ayaklar)
     /// <summary>
     /// Provides access to the underlying asset instance.
     /// </summary>
@@ -353,4 +355,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
     }
+    void CreateDust()
+{
+    // Efekti ayaklarýn olduðu yerde oluþtur
+    Instantiate(DustEffect, feetPos.position, Quaternion.identity);
+}
+
 }

@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
+
 {
-     [SerializeField] private float moveSpeed = 1f;
+    public GameObject DustEffect; // Unity içinden buraya prefab'ý sürükleyeceðiz
+    public Transform feetPos;     // Tozun çýkacaðý yer (Ayaklar)
+
+    [SerializeField] private float moveSpeed = 1f;
 
      private PlayerControls playerControls;
      private Vector2 movement;
@@ -65,5 +69,11 @@ public class PlayerController : MonoBehaviour
                mySpriteRenderer.flipX = false;
         }
 
+    }
+
+    void CreateDust()
+    {
+        // Efekti ayaklarýn olduðu yerde oluþtur
+        Instantiate(DustEffect, feetPos.position, Quaternion.identity);
     }
 }

@@ -167,6 +167,8 @@ GameObject:
   - component: {fileID: 67207849}
   - component: {fileID: 67207848}
   - component: {fileID: 67207852}
+  - component: {fileID: 67207854}
+  - component: {fileID: 67207853}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -213,6 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765c67b155a384d8890b23ad76ba3b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  DustEffect: {fileID: 0}
+  feetPos: {fileID: 0}
   moveSpeed: 6
 --- !u!212 &67207850
 SpriteRenderer:
@@ -310,6 +314,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &67207853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67207847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9306248b2d280948a7aa8e188ef47c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  mySprite: {fileID: 0}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &67207854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67207847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85584aff14f5f2c4199caaec358ed81d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 100
+  currentHealth: 0
+  deathEffect: {fileID: 0}
 --- !u!1 &69603822
 GameObject:
   m_ObjectHideFlags: 0

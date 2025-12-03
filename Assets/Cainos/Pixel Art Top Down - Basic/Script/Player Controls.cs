@@ -74,8 +74,8 @@ using UnityEngine.InputSystem.Utilities;
 /// </example>
 public partial class @PlayerControls: MonoBehaviour, IInputActionCollection2, IDisposable
 {
-    public GameObject DustEffect; // Unity içinden buraya prefab'ý sürükleyeceðiz
-    public Transform feetPos;     // Tozun çýkacaðý yer (Ayaklar)
+    public GameObject DustEffect; // Unity iï¿½inden buraya prefab'ï¿½ sï¿½rï¿½kleyeceï¿½iz
+    public Transform feetPos;     // Tozun ï¿½ï¿½kacaï¿½ï¿½ yer (Ayaklar)
     /// <summary>
     /// Provides access to the underlying asset instance.
     /// </summary>
@@ -357,7 +357,7 @@ public partial class @PlayerControls: MonoBehaviour, IInputActionCollection2, ID
     }
     void CreateDust()
 {
-    // Efekti ayaklarýn olduðu yerde oluþtur
+    // Efekti ayaklarï¿½n olduï¿½u yerde oluï¿½tur
     Instantiate(DustEffect, feetPos.position, Quaternion.identity);
 }
 

@@ -72,7 +72,7 @@ using UnityEngine.InputSystem.Utilities;
 /// }
 /// </code>
 /// </example>
-public partial class @PlayerControls: MonoBehaviour, IInputActionCollection2, IDisposable
+public partial class @PlayerControls: IInputActionCollection2, IDisposable
 {
     public GameObject DustEffect; // Unity i�inden buraya prefab'� s�r�kleyece�iz
     public Transform feetPos;     // Tozun ��kaca�� yer (Ayaklar)
@@ -357,8 +357,8 @@ public partial class @PlayerControls: MonoBehaviour, IInputActionCollection2, ID
     }
     void CreateDust()
 {
-    // Efekti ayaklar�n oldu�u yerde olu�tur
-    Instantiate(DustEffect, feetPos.position, Quaternion.identity);
+        // Efekti ayaklar�n oldu�u yerde olu�tur
+        UnityEngine.Object.Instantiate(DustEffect, feetPos.position, Quaternion.identity);
 }
 
 }

@@ -215,8 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765c67b155a384d8890b23ad76ba3b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  DustEffect: {fileID: 0}
+  DustEffect: {fileID: 1029684322881256396, guid: f7c1a6d2bda929249a6d625fb7478775,
+    type: 3}
   feetPos: {fileID: 0}
+  dustRate: 0.2
   moveSpeed: 6
 --- !u!212 &67207850
 SpriteRenderer:
@@ -342,7 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
   currentHealth: 0
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
+    type: 3}
 --- !u!1 &69603822
 GameObject:
   m_ObjectHideFlags: 0
@@ -4023,6 +4026,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &393706553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393706554}
+  m_Layer: 0
+  m_Name: FeetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &393706554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393706553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.039, y: -0.096, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2012501564}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6052,7 +6086,8 @@ Transform:
   m_LocalPosition: {x: -3.71, y: -2.16, z: 0}
   m_LocalScale: {x: 8, y: 7.397761, z: 1.0659478}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 393706554}
   m_Father: {fileID: 1419198499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2012501565
@@ -6067,7 +6102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9306248b2d280948a7aa8e188ef47c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  mySprite: {fileID: 0}
+  mySprite: {fileID: 2012501570}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2012501566
 MonoBehaviour:
@@ -6083,7 +6118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
   currentHealth: 0
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
+    type: 3}
 --- !u!95 &2012501567
 Animator:
   serializedVersion: 7
@@ -6145,8 +6181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765c67b155a384d8890b23ad76ba3b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  DustEffect: {fileID: 0}
-  feetPos: {fileID: 0}
+  DustEffect: {fileID: 1029684322881256396, guid: f7c1a6d2bda929249a6d625fb7478775,
+    type: 3}
+  feetPos: {fileID: 393706554}
+  dustRate: 0.2
   moveSpeed: 6
 --- !u!212 &2012501570
 SpriteRenderer:

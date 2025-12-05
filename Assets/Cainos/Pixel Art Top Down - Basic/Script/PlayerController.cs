@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("VFX Ayarlarý")] // Inspector'da düzenli görünmesi için baþlýk
+    [Header("VFX AyarlarÄ±")] // Inspector'da dÃ¼zenli gÃ¶rÃ¼nmesi iÃ§in baÅŸlÄ±k
     public GameObject DustEffect;
     public Transform feetPos;
     public float dustRate = 0.2f;
     private float nextDustTime;
 
-    [Header("Hareket Ayarlarý")]
-    [SerializeField] private float moveSpeed = 5f; // 1f çok yavaþ olabilir, 5f yaptým
+    [Header("Hareket AyarlarÄ±")]
+    [SerializeField] private float moveSpeed = 5f; // 1f Ã§ok yavaÅŸ olabilir, 5f yaptÄ±m
 
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -37,13 +37,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PlayerInput();
-        HandleDustEffect(); // <-- YENÝ: Toz efektini burada kontrol ediyoruz
+        HandleDustEffect();
     }
-
 
     private void FixedUpdate()
     {
-        AdjustPlayerFacingDirection();
+        AdjustPlayerFacingDirection(); // <-- BurasÄ± deÄŸiÅŸti
         Move();
     }
 
@@ -55,14 +54,12 @@ public class PlayerController : MonoBehaviour
         myAnimator.SetFloat("moveY", movement.y);
     }
 
-    // --- YENÝ EKLENEN FONKSÝYON ---
     private void HandleDustEffect()
     {
-        // Karakter hareket ediyor mu? 
-        // movement.sqrMagnitude > 0 demek, vektörün boyu 0'dan büyük yani hareket var demektir.
+        // Karakter hareket ediyor mu?
         if (movement.sqrMagnitude > 0.01f)
         {
-            // Zamanlayýcý kontrolü
+            // ZamanlayÄ±cÄ± kontrolÃ¼
             if (Time.time >= nextDustTime)
             {
                 CreateDust();
@@ -70,31 +67,37 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    // -----------------------------
 
     private void Move()
     {
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
+    // ##################################################################
+    // ############ DEÄžÄ°ÅžTÄ°RÄ°LEN VE YENÄ°LENEN FONKSÄ°YON ############
+    // ##################################################################
     private void AdjustPlayerFacingDirection()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(transform.position);
-
-        if (mousePos.x < playerScreenPoint.x)
+        // YalnÄ±zca yatay (X ekseninde) hareket varsa karakterin yÃ¶nÃ¼nÃ¼ deÄŸiÅŸtir.
+        if (movement.x > 0.01f) // SaÄŸa hareket (D tuÅŸu)
         {
-            mySpriteRenderer.flipX = true;
-        }
-        else
-        {
+            // Karakter saÄŸa baksÄ±n (normal)
             mySpriteRenderer.flipX = false;
         }
+        else if (movement.x < -0.01f) // Sola hareket (A tuÅŸu)
+        {
+            // Karakter sola baksÄ±n (sprite'Ä± yatayda Ã§evir)
+            mySpriteRenderer.flipX = true;
+        }
+        // EÄŸer hareket.x yaklaÅŸÄ±k 0 ise (duruyorsa veya sadece yukarÄ±/aÅŸaÄŸÄ± hareket ediyorsa), 
+        // son baktÄ±ÄŸÄ± yÃ¶nÃ¼ koruyacaktÄ±r.
     }
+    // ##################################################################
+    // ##################################################################
 
     void CreateDust()
     {
-        // Güvenlik kontrolü: Eðer inspector'dan atamayý unuttuysan oyun çökmesin
+        // GÃ¼venlik kontrolÃ¼
         if (DustEffect != null && feetPos != null)
         {
             Instantiate(DustEffect, feetPos.position, Quaternion.identity);

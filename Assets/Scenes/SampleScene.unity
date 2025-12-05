@@ -26491,7 +26491,7 @@ MonoBehaviour:
   DustEffect: {fileID: 0}
   feetPos: {fileID: 0}
   dustRate: 0.2
-  moveSpeed: 5
+  moveSpeed: 6
   CanMove: 1
 --- !u!114 &2012501574
 MonoBehaviour:

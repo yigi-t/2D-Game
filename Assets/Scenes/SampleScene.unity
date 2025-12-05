@@ -346,6 +346,10 @@ MonoBehaviour:
   currentHealth: 0
   deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
     type: 3}
+  contactDamageAmount: 20
+  enemyTag: Enemy
+  knockbackForce: 15
+  knockbackDuration: 0.25
 --- !u!1 &69603822
 GameObject:
   m_ObjectHideFlags: 0
@@ -25601,9 +25605,10 @@ GameObject:
   - component: {fileID: 1639882083}
   - component: {fileID: 1639882082}
   - component: {fileID: 1639882086}
+  - component: {fileID: 1639882088}
   m_Layer: 0
   m_Name: Enemy Player
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25768,6 +25773,43 @@ MonoBehaviour:
   player: {fileID: 2012501564}
   moveSpeed: 3
   sightRange: 15
+--- !u!70 &1639882088
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639882080}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.009667624, y: 0.06784533}
+  m_Size: {x: 0.6951017, y: 1.4058071}
+  m_Direction: 0
 --- !u!1 &1744455004
 GameObject:
   m_ObjectHideFlags: 0
@@ -26217,10 +26259,13 @@ GameObject:
   - component: {fileID: 2012501564}
   - component: {fileID: 2012501570}
   - component: {fileID: 2012501569}
+  - component: {fileID: 2012501573}
+  - component: {fileID: 2012501572}
   - component: {fileID: 2012501568}
   - component: {fileID: 2012501567}
-  - component: {fileID: 2012501566}
+  - component: {fileID: 2012501574}
   - component: {fileID: 2012501565}
+  - component: {fileID: 2012501571}
   m_Layer: 0
   m_Name: Player (cat)
   m_TagString: Untagged
@@ -26258,22 +26303,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
   mySprite: {fileID: 2012501570}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &2012501566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012501563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85584aff14f5f2c4199caaec358ed81d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 100
-  currentHealth: 0
-  deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
-    type: 3}
 --- !u!95 &2012501567
 Animator:
   serializedVersion: 7
@@ -26330,7 +26359,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012501563}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 765c67b155a384d8890b23ad76ba3b4e, type: 3}
   m_Name: 
@@ -26398,6 +26427,93 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &2012501571
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012501563}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.021041125, y: -0.000000016114239}
+  m_Size: {x: 0.15187842, y: 0.21724615}
+  m_Direction: 0
+--- !u!114 &2012501572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012501563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6063cbc20f0204514a514dc89a110942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackReceiver
+--- !u!114 &2012501573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012501563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1089909a117840a79c629bae653d6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  DustEffect: {fileID: 0}
+  feetPos: {fileID: 0}
+  dustRate: 0.2
+  moveSpeed: 5
+  CanMove: 1
+--- !u!114 &2012501574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012501563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63b2422c9097496680e519862dbc439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health1
+  maxHealth: 100
+  currentHealth: 0
+  deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
+    type: 3}
+  contactDamageAmount: 20
+  enemyTag: Enemy
+  invulnerabilityDuration: 0.5
+  knockbackForce: 15
+  knockbackDuration: 0.25
 --- !u!1 &2146132156
 GameObject:
   m_ObjectHideFlags: 0

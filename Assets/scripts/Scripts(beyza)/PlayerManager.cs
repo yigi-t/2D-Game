@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public HUDManager hudManager;
-    // InventoryManager'ý buraya Inspector'da baðlayacaðýz
-    public InventoryManager inventoryManager; // Yeni eklenen satýr!
+    // InventoryManager'ï¿½ buraya Inspector'da baï¿½layacaï¿½ï¿½z
+    public InventoryManager inventoryManager; // Yeni eklenen satï¿½r!
 
     public int currentHealth = 100;
     public int currentGold = 0;
@@ -17,26 +17,26 @@ public class PlayerManager : MonoBehaviour
         hudManager.UpdateMaterials(currentMaterials);
     }
 
-    // --- YENÝ FONKSÝYON: Eþya Ekleme ---
+    // --- YENï¿½ FONKSï¿½YON: Eï¿½ya Ekleme ---
     public void AddItem(Item itemToAdd, int amount = 1)
     {
-        // Envanter yöneticisine eþyayý eklemesini söyle
-        if (inventoryManager != null) // inventoryManager baðlý mý kontrol et
+        // Envanter yï¿½neticisine eï¿½yayï¿½ eklemesini sï¿½yle
+        if (inventoryManager != null) // inventoryManager baï¿½lï¿½ mï¿½ kontrol et
         {
             inventoryManager.AddItemToInventory(itemToAdd, amount);
         }
 
-        // Eðer eþya bir altýn veya malzeme ise HUD'u da güncelle
-        if (itemToAdd.itemName == "Altýn Para") // Item adýný kontrol et
+        // Eï¿½er eï¿½ya bir altï¿½n veya malzeme ise HUD'u da gï¿½ncelle
+        if (itemToAdd.itemName == "AltÄ±n Para") // Item adï¿½nï¿½ kontrol et
         {
             currentGold += amount;
             hudManager.UpdateGold(currentGold);
         }
-        else if (itemToAdd.itemName == "Tahta Malzeme") // Item adýný kontrol et
+        else if (itemToAdd.itemName == "Tahta Malzeme") // Item adï¿½nï¿½ kontrol et
         {
             currentMaterials += amount;
             hudManager.UpdateMaterials(currentMaterials);
         }
-        // Diðer eþya türleri için de buraya else if ekleyebilirsiniz
+        // Diï¿½er eï¿½ya tï¿½rleri iï¿½in de buraya else if ekleyebilirsiniz
     }
 }

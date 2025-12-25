@@ -80,14 +80,14 @@ public class Health1 : MonoBehaviour
         canTakeDamage = true; // Hasar almayı tekrar aç
     }
 
-    void Die()
-    {
-        Debug.Log(gameObject.name + " öldü!");
+    public GameOverManager gameManager; // Inspector'dan Game Manager'ı ata
 
-        if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
-        Destroy(gameObject);
+    void Die() // Karakter öldüğünde çalışan fonksiyon
+    {
+        // Karakter animasyonunu oynat, ses çal vs.
+        Debug.Log("Öldün!");
+
+        // Game Over ekranını çağır
+        gameManager.ShowGameOver();
     }
 }

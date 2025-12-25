@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     {
         StopAllCoroutines(); 
         StartCoroutine(KnockbackRoutine(direction, force, duration));
-    }
+    } 
 
     // İttirme sürecini ve yumuşak durmayı yöneten Coroutine
     private IEnumerator KnockbackRoutine(Vector3 direction, float force, float duration)

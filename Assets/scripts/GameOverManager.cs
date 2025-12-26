@@ -26,6 +26,6 @@ public class GameOverManager : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1f; // Zamaný normalleþtir
-        SceneManager.LoadScene("AnaMenuSahneIsmi"); // Ana menü sahnenin tam adýný yaz
+        SceneManager.LoadScene("MainMenu"); // Ana menü sahnenin tam adýný yaz
     }
 }

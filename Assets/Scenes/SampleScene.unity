@@ -1499,6 +1499,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1650275035}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1487902149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7376404467531229190, guid: 135d0a133c1fd44608426420bfefb555,
+    type: 3}
+  m_PrefabInstance: {fileID: 1650275035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &1522577757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1769,6 +1781,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7376404467531229190, guid: 135d0a133c1fd44608426420bfefb555,
+        type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376404467531229190, guid: 135d0a133c1fd44608426420bfefb555,
+        type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7501507371240610800, guid: 135d0a133c1fd44608426420bfefb555,
         type: 3}
       propertyPath: m_fontAsset
@@ -1806,6 +1828,11 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8061927353542123353, guid: 135d0a133c1fd44608426420bfefb555,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8707353975098496842, guid: 135d0a133c1fd44608426420bfefb555, type: 3}
@@ -1822,7 +1849,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2111682976}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8061927353542123353, guid: 135d0a133c1fd44608426420bfefb555,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1773301397}
   m_SourcePrefab: {fileID: 100100000, guid: 135d0a133c1fd44608426420bfefb555, type: 3}
 --- !u!1 &1736526181 stripped
 GameObject:
@@ -1863,6 +1894,25 @@ Transform:
   - {fileID: 565905019}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1773301394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8061927353542123353, guid: 135d0a133c1fd44608426420bfefb555,
+    type: 3}
+  m_PrefabInstance: {fileID: 1650275035}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1773301397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773301394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc802b83d8067f949b45e0d3eeab4738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  barImage: {fileID: 1487902149}
 --- !u!1 &1800467195 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7436637041370307923, guid: 7f7741bb8b975884a853ca726553e94a,
@@ -2207,6 +2257,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dogus_Nokta_1
       objectReference: {fileID: 0}
+    - target: {fileID: 5767410503256507162, guid: 9ff4b32604d9061448585a042fa1028b,
+        type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1773301397}
     - target: {fileID: 6017283817875588812, guid: 9ff4b32604d9061448585a042fa1028b,
         type: 3}
       propertyPath: m_Name

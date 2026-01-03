@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections; // Coroutine için gerekli
 using UnityEngine;
 
 public class Health1 : MonoBehaviour
@@ -6,20 +6,22 @@ public class Health1 : MonoBehaviour
     // --- DEĞİŞKENLER ---
     public int maxHealth = 100;
     public int currentHealth;
-    public GameObject deathEffect;
+    public GameObject deathEffect; // Patlama Efekti Prefab'ı buraya
 
     [Header("Temas Hasarı Ayarları")]
-    public int contactDamageAmount = 20; 
-    public string enemyTag = "Enemy"; 
-    
+    public int contactDamageAmount = 20;
+    public string enemyTag = "Enemy";
+
     // 👇 YENİ: Hasar Cooldown Ayarları
     [Header("Hasar Cooldown")]
     public float invulnerabilityDuration = 0.5f; // Dokunulmazlık süresi (saniye)
     private bool canTakeDamage = true; // Hasar alıp alamayacağını kontrol eder
 
     [Header("İttirme Ayarları")]
-    public float knockbackForce = 15f; 
-    public float knockbackDuration = 0.25f; 
+    public float knockbackForce = 15f;
+    public float knockbackDuration = 0.25f;
+
+    public GameOverManager gameManager; // Inspector'dan Game Manager'ı ata
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class Health1 : MonoBehaviour
         if (canTakeDamage && other.CompareTag(enemyTag))
         {
             Vector3 hitDirection = transform.position - other.transform.position;
-            hitDirection.Normalize(); 
+            hitDirection.Normalize();
 
             TakeDamage(contactDamageAmount, hitDirection);
         }
@@ -77,7 +79,7 @@ public class Health1 : MonoBehaviour
         }
     }
 
-    // 👇 YENİ: Dokunulmazlık süresini yöneten Coroutine
+    // 👇 Dokunulmazlık süresini yöneten Coroutine
     private IEnumerator InvulnerabilityRoutine()
     {
         canTakeDamage = false; // Hasar almayı kapat
@@ -85,13 +87,45 @@ public class Health1 : MonoBehaviour
         canTakeDamage = true; // Hasar almayı tekrar aç
     }
 
-    public GameOverManager gameManager; // Inspector'dan Game Manager'ı ata
-    void Die() // Karakter öldüğünde çalışan fonksiyon
+    // --- ÖLÜM VE PATLAMA KISMI (Burayı Düzenledim) ---
+    void Die()
     {
-        // Karakter animasyonunu oynat, ses çal vs.
-        Debug.Log("Öldün!");
+        // 1. Patlama Efektini Oluştur
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
+        Debug.Log("Öldün! Patlama oynuyor...");
+
+        // 2. Karakteri GİZLE (Yok etme, sadece görünmez yap)
+        // Böylece kod çalışmaya devam eder ve süreyi sayabilir.
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null) sr.enabled = false;
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+
+        // Ayrıca karakterin hareket scriptini de durdurmak isteyebilirsin (Opsiyonel)
+        // GetComponent<PlayerController>().enabled = false; 
+
+        // 3. Bekleme Sayacını Başlat
+        StartCoroutine(BekleVeOyunSonu());
+    }
+
+    // Game Over ekranını açmadan önce bekleyen özel fonksiyon
+    IEnumerator BekleVeOyunSonu()
+    {
+        // 1.5 Saniye bekle (Patlama animasyonunu izle)
+        yield return new WaitForSeconds(1.5f);
 
         // Game Over ekranını çağır
-        gameManager.ShowGameOver();
+        if (gameManager != null)
+        {
+            gameManager.ShowGameOver();
+        }
+
+        // Artık karakteri tamamen silebiliriz
+        Destroy(gameObject);
     }
 }

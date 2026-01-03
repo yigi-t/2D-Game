@@ -24,6 +24,11 @@ public class Health1 : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
+        if (gameManager == null)
+        {
+            gameManager = FindFirstObjectByType<GameOverManager>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -81,7 +86,6 @@ public class Health1 : MonoBehaviour
     }
 
     public GameOverManager gameManager; // Inspector'dan Game Manager'ı ata
-
     void Die() // Karakter öldüğünde çalışan fonksiyon
     {
         // Karakter animasyonunu oynat, ses çal vs.

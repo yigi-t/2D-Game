@@ -2,100 +2,104 @@ using UnityEngine;
 
 public class EnemyAI_Optimized : MonoBehaviour
 {
-    // === Bileşen Referansları ===
     private Rigidbody2D rb;
+    private Transform currentTarget; 
 
-    [SerializeField] private Transform player;
+    [Header("Referanslar")]
+    [SerializeField] private Transform backupPlayer; 
 
-    // === Ayarlar ===
+    [Header("Hareket Ayarları")]
     public float moveSpeed = 3f;
-    [Tooltip("Düşmanın oyuncuyu algılayabileceği maksimum mesafe (Görüş Menzili).")]
-    public float sightRange = 8f;
-
-    // Karekök işleminden kaçınmak için sightRange'in karesi
+    public float sightRange = 15f;
     private float sightRangeSq;
 
-    // ===================================
+    [Header("Ateş Etme Ayarları")]
+    public Transform muzzleTransform; 
+    public GameObject bulletPrefab;   
+    public float fireRate = 1.2f;     
+    private float nextFireTime = 0f;  
+
+    [Header("Hedefleme Ayarları")]
+    public string[] targetTags = { "Cat", "Enemy" }; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // Optimizasyon için sightRange'in karesini Start'ta hesapla.
         sightRangeSq = sightRange * sightRange;
-
-        if (rb == null) Debug.LogError("Rigidbody2D bileşeni bulunamadı!");
-        if (player == null) Debug.LogError("Player Transform'u atanmadı!");
-
-        // *NOT:* Oyuncu bulma mantığı, kodun temiz kalması için kaldırıldı.
     }
 
-    // ===================================
-    // 2. ANA DÖNGÜ VE KARAR VERME (FİZİK)
-    // ===================================
-    void FixedUpdate()
-    {
-        if (player == null)
-        {
-            StopMoving();
-            return;
-        }
-
-        // Vektörel farkın karesini (sqrMagnitude) hesapla.
-        float distanceSqToPlayer = (player.position - transform.position).sqrMagnitude;
-
-        // Karekök almadan kontrol: (distance < sightRange) yerine (distance^2 < sightRange^2)
-        if (distanceSqToPlayer < sightRangeSq)
-        {
-            ChasePlayer();
-        }
-        else
-        {
-            StopMoving();
-        }
-    }
-
-    // Yüz Çevirme FixedUpdate/Update ayrımı:
     void Update()
     {
-        if (player == null) return;
-        FlipCharacter(player.position);
-    }
+        currentTarget = FindClosestTarget();
 
-    // Yön Bulma ve Hareket (Fizik)
-    private void ChasePlayer()
-    {
-        // Yönü normalize etmeden sadece konum farkını alıp normalize edilebilir
-        Vector2 direction = (player.position - transform.position).normalized;
-        rb.linearVelocity = direction * moveSpeed;
-    }
+        if (currentTarget == null) currentTarget = backupPlayer;
+        if (currentTarget == null) return;
 
-    // Hareketi Durdurma
-    private void StopMoving()
-    {
-        rb.linearVelocity = Vector2.zero;
-    }
+        FlipCharacter(currentTarget.position);
 
-    // Mevcut FlipCharacter metodunuzu buraya ekleyebilirsiniz.
-    private void FlipCharacter(Vector3 targetPosition)
-    {
-        // ... (FlipCharacter kodunuz)
-        float directionX = targetPosition.x - transform.position.x;
-        Vector3 newScale = transform.localScale;
-        if (directionX > 0 && newScale.x < 0)
+        float distanceSq = (currentTarget.position - transform.position).sqrMagnitude;
+        if (distanceSq < sightRangeSq && Time.time >= nextFireTime)
         {
-            newScale.x *= -1;
+            Shoot(currentTarget);
+            nextFireTime = Time.time + fireRate;
         }
-        else if (directionX < 0 && newScale.x > 0)
-        {
-            newScale.x *= -1;
-        }
-        transform.localScale = newScale;
     }
 
-    // Geliştirme aşamasında görüş menzilini gösteren görselleştirme (Gizmos)
-    private void OnDrawGizmosSelected()
+    void FixedUpdate()
     {
-        Gizmos.color = Color.red;
-        // Gizmos.DrawWireSphere, karesel değil, normal sightRange ister.
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        if (currentTarget == null) return;
+
+        float distanceSq = (currentTarget.position - transform.position).sqrMagnitude;
+        if (distanceSq < sightRangeSq)
+            rb.linearVelocity = (currentTarget.position - transform.position).normalized * moveSpeed;
+        else
+            rb.linearVelocity = Vector2.zero;
+    }
+
+    private Transform FindClosestTarget()
+    {
+        float closestDistanceSq = sightRangeSq;
+        Transform bestTarget = null;
+
+        foreach (string tag in targetTags)
+        {
+            GameObject[] potentialTargets = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject obj in potentialTargets)
+            {
+                if (obj == gameObject) continue;
+
+                // --- KRİTİK: Sadece canı olan (Health scriptli) objeleri vur ---
+                if (obj.GetComponent<Health>() == null) continue;
+
+                float distSq = (obj.transform.position - transform.position).sqrMagnitude;
+                if (distSq < closestDistanceSq)
+                {
+                    closestDistanceSq = distSq;
+                    bestTarget = obj.transform;
+                }
+            }
+        }
+        return bestTarget;
+    }
+
+    private void FlipCharacter(Vector3 target)
+    {
+        float dirX = target.x - transform.position.x;
+        Vector3 s = transform.localScale;
+        if (dirX > 0 && s.x < 0) s.x *= -1;
+        else if (dirX < 0 && s.x > 0) s.x *= -1;
+        transform.localScale = s;
+    }
+
+    private void Shoot(Transform target)
+    {
+        if (muzzleTransform == null || bulletPrefab == null) return;
+
+        Vector2 dir = (target.position - muzzleTransform.position).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        GameObject b = Instantiate(bulletPrefab, muzzleTransform.position, Quaternion.Euler(0, 0, angle));
+        Bullet bs = b.GetComponent<Bullet>();
+        if (bs != null) bs.shooter = gameObject;
     }
 }

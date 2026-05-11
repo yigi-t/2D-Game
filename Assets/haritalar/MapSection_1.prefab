@@ -262,7 +262,6 @@ GameObject:
   - component: {fileID: 5610047348550338117}
   - component: {fileID: 2283273731015407732}
   - component: {fileID: 8378333284420002904}
-  - component: {fileID: 4245692959147327665}
   - component: {fileID: 3839403244130644861}
   m_Layer: 0
   m_Name: Player
@@ -411,26 +410,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4245692959147327665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3072077834295309933}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85584aff14f5f2c4199caaec358ed81d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 100
-  currentHealth: 0
-  deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
-    type: 3}
-  contactDamageAmount: 20
-  enemyTag: Enemy
-  knockbackForce: 15
-  knockbackDuration: 0.25
 --- !u!114 &3839403244130644861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,9 +915,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d9829cec4cffa44b39a2836281c077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player: {fileID: 4073867444282686700}
+  backupPlayer: {fileID: 0}
   moveSpeed: 3
   sightRange: 15
+  muzzleTransform: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  fireRate: 1.2
+  targetTags:
+  - Cat
+  - Enemy
 --- !u!50 &9195389371024789187
 Rigidbody2D:
   serializedVersion: 5
@@ -1338,8 +1323,6 @@ MonoBehaviour:
   deathEffect: {fileID: 4444027012817449533, guid: 5d49c9ad034c6c242bc4e7ca6c7bfe01,
     type: 3}
   healthBar: {fileID: 0}
-  contactDamageAmount: 20
-  enemyTag: Enemy
   invulnerabilityDuration: 0.5
   knockbackForce: 15
   knockbackDuration: 0.25

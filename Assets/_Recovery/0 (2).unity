@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 565905020}
   m_Layer: 0
   m_Name: State-Driven Camera
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1784,11 +1784,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3562933643207429349, guid: 135d0a133c1fd44608426420bfefb555,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4677450842224864169, guid: 135d0a133c1fd44608426420bfefb555,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1829,11 +1824,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7025785034139613104, guid: 135d0a133c1fd44608426420bfefb555,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7376404467531229190, guid: 135d0a133c1fd44608426420bfefb555,
         type: 3}
@@ -2721,8 +2711,7 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Bullet
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4245692959147327665, guid: 9ff4b32604d9061448585a042fa1028b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1133192879032753948, guid: 9ff4b32604d9061448585a042fa1028b, type: 3}
     m_AddedGameObjects:
@@ -3240,6 +3229,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec8ef88e5d08f6409d7018e1470c0da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaritaYonetici
+  haritaPrefabi: {fileID: 6017283817875588812, guid: 9ff4b32604d9061448585a042fa1028b,
+    type: 3}
+  buyukObjeler:
+  - {fileID: 2055102311959635369, guid: 5b94bf9107369684a8153921f763da38, type: 3}
+  - {fileID: 2055102311959635369, guid: f681a54372d73d74785b9c9d4ac477e8, type: 3}
+  - {fileID: 2055102311959635369, guid: 9e7797bb065982d4497d030f065d6e2f, type: 3}
+  kucukObjeler:
+  - {fileID: 2055102311959635369, guid: 17b0c1ef334d17e4bbb74c4778001705, type: 3}
+  - {fileID: 7947911505737750455, guid: 5d42979a3c318c341b37b4b1f2c85750, type: 3}
 --- !u!1 &2146132156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,7 +3251,7 @@ GameObject:
   - component: {fileID: 2146132159}
   m_Layer: 0
   m_Name: CinemachineCamera
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

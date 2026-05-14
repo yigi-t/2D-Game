@@ -56,5 +56,8 @@ TagManager:
   - name: MapObjects
     uniqueID: 3880957391
     locked: 0
+  - name: Mermiler
+    uniqueID: 1581893321
+    locked: 0
   m_RenderingLayers:
   - Default

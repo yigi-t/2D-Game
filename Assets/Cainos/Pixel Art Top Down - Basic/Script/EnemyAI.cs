@@ -20,12 +20,29 @@ public class EnemyAI_Optimized : MonoBehaviour
     private float nextFireTime = 0f;  
 
     [Header("Hedefleme Ayarları")]
-    public string[] targetTags = { "Cat", "Enemy" }; 
+    // === GÜNCELLEME: Sadece kediyi hedef alacak şekilde daralttık ===
+    public string[] targetTags = { "Cat" }; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sightRangeSq = sightRange * sightRange;
+
+        // Otomatik Renklendirme Sistemi
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Color[] renkHavuzu = new Color[]
+            {
+                Color.red,
+                new Color(0f, 0.5f, 1f),
+                new Color(0f, 0.8f, 0.1f),
+                new Color(1f, 0.5f, 0f),
+                Color.magenta,
+                Color.cyan
+            };
+            spriteRenderer.color = renkHavuzu[Random.Range(0, renkHavuzu.Length)];
+        }
     }
 
     void Update()
@@ -67,8 +84,6 @@ public class EnemyAI_Optimized : MonoBehaviour
             foreach (GameObject obj in potentialTargets)
             {
                 if (obj == gameObject) continue;
-
-                // --- KRİTİK: Sadece canı olan (Health scriptli) objeleri vur ---
                 if (obj.GetComponent<Health>() == null) continue;
 
                 float distSq = (obj.transform.position - transform.position).sqrMagnitude;

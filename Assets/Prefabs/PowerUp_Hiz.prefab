@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2998502310051934169}
   - component: {fileID: 1786112958394210835}
   - component: {fileID: 8256082444039187729}
+  - component: {fileID: -4208247093687021329}
   m_Layer: 0
   m_Name: PowerUp_Hiz
   m_TagString: Untagged
@@ -141,3 +142,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpController
   powerUpData: {fileID: 11400000, guid: 594a9756b1999dd4faee76f6e2fb6cc4, type: 2}
+--- !u!50 &-4208247093687021329
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901122302421298063}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

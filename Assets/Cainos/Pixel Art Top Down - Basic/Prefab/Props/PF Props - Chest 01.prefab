@@ -235,8 +235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48ea38f528406846afc8396e1b1c7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chest
-  powerUpPrefab: {fileID: 1901122302421298063, guid: 194c8e8f68ecd0142ad2f6b10b1cf846,
-    type: 3}
+  powerUpPrefabs:
+  - {fileID: 1901122302421298063, guid: 14c5e35b12dc65541a4c3db34eb18ec6, type: 3}
+  - {fileID: 1901122302421298063, guid: 2143cd57d78a78b4bb0f595de1ce78b0, type: 3}
+  - {fileID: 1901122302421298063, guid: 194c8e8f68ecd0142ad2f6b10b1cf846, type: 3}
   spawnPoint: {fileID: 0}
   openedChestSprite: {fileID: 21300040, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
 --- !u!1 &2055102312182832482

@@ -40,8 +40,6 @@ public class PowerUpController : MonoBehaviour
             // FPS düþüþünü önlemek için sqrMagnitude optimizasyonu kullanýyoruz
             float distanceSqr = (transform.position - playerTransform.position).sqrMagnitude;
 
-            // Eðer aradaki mesafe (karesi) 1.5 birimden küçükse (kedi yeterince yakýnsa) iksiri al
-            // (1.5f deðerini kedinin büyüklüðüne göre artýrýp azaltabilirsin)
             if (distanceSqr < 1.5f)
             {
                 PlayerPowerUpManager manager = playerTransform.GetComponent<PlayerPowerUpManager>();

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f94dfabf8556a54c840043f36d618d2, type: 3}
-  m_Name: HizIksiri
+  m_Name: HasarIksiri
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
-  powerUpName: "H\u0131z \u0130ksiri"
-  icon: {fileID: 21300000, guid: 269db0ca4f7383b46b1df08575c42b00, type: 3}
-  type: 0
-  value: 5
+  powerUpName: "Hasar \u0130ksiri"
+  icon: {fileID: 21300000, guid: 24b4b5cb7e697f347841c67288b44d60, type: 3}
+  type: 2
+  value: 20
   duration: 15
   isPermanent: 0

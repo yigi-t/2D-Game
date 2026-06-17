@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     [Header("Can Ayarları")]
     public int maxHealth = 100;
     public int currentHealth;
-    public GameObject deathEffect; 
+    public GameObject deathEffect;
 
     [Header("UI Bağlantıları")]
     [Tooltip("Eğer bu obje kedi ise HUD'daki barı buraya bağlayın.")]
@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     public HealthBarEnemy enemyHealthBar;
 
     [Header("Hasar Kontrolü")]
-    public float invulnerabilityDuration = 0.1f; 
+    public float invulnerabilityDuration = 0.1f;
     private bool canTakeDamage = true;
 
     [Header("İttirme (Knockback) Ayarları")]
@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         gameManager = Object.FindFirstObjectByType<GameOverManager>();
-        
+
         // Oyun başında hangi bar tanımlıysa onu fulle
         TriggerBarUpdate();
     }
@@ -39,8 +39,8 @@ public class Health : MonoBehaviour
         if (!canTakeDamage) return;
 
         currentHealth -= damageAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); 
-        
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
         // Can barlarını güncelle
         TriggerBarUpdate();
 
@@ -92,6 +92,18 @@ public class Health : MonoBehaviour
             Instantiate(deathEffect, transform.position, Quaternion.identity);
 
         Debug.Log(gameObject.name + " elendi!");
+
+        // --- YENİ EKLEDİĞİMİZ KAZANMA TETİKLEYİCİSİ ---
+        // Eğer ölen obje kedi DEĞİLSE (yani bir köpek/düşmansa)
+        if (!gameObject.CompareTag("Cat"))
+        {
+            OyunYoneticisi yeniManager = Object.FindFirstObjectByType<OyunYoneticisi>();
+            if (yeniManager != null)
+            {
+                yeniManager.DusmanOldu(); // Sayaçtan bir düşman düşürür
+            }
+        }
+        // ----------------------------------------------
 
         if (gameObject.CompareTag("Cat") && gameManager != null)
             gameManager.ShowGameOver();

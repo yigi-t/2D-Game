@@ -24,11 +24,15 @@ public class Health : MonoBehaviour
     public float knockbackDuration = 0.15f;
 
     private GameOverManager gameManager;
+    // === YENİ: Bağımsız Kazanma Yöneticisi Referansı ===
+    private GameWinManager winManager;
 
     void Start()
     {
         currentHealth = maxHealth;
         gameManager = Object.FindFirstObjectByType<GameOverManager>();
+        // Oyun başında sahnedeki GameWinManager'ı otomatik buluyoruz
+        winManager = Object.FindFirstObjectByType<GameWinManager>();
 
         // Oyun başında hangi bar tanımlıysa onu fulle
         TriggerBarUpdate();
@@ -93,8 +97,7 @@ public class Health : MonoBehaviour
 
         Debug.Log(gameObject.name + " elendi!");
 
-        // --- YENİ EKLEDİĞİMİZ KAZANMA TETİKLEYİCİSİ ---
-        // Eğer ölen obje kedi DEĞİLSE (yani bir köpek/düşmansa)
+        // --- ESKİ KAZANMA TETİKLEYİCİSİ (Aynen Korundu) ---
         if (!gameObject.CompareTag("Cat"))
         {
             OyunYoneticisi yeniManager = Object.FindFirstObjectByType<OyunYoneticisi>();
@@ -103,7 +106,26 @@ public class Health : MonoBehaviour
                 yeniManager.DusmanOldu(); // Sayaçtan bir düşman düşürür
             }
         }
-        // ----------------------------------------------
+        // --------------------------------------------------
+
+        // === SEÇENEK B: YENİ BAĞIMSIZ GAMEWIN TETİKLEYİCİSİ ===
+        // Eğer elenen bir düşman ise sahneyi kontrol et ve kalan düşman sayısına bak
+        if (gameObject.CompareTag("Enemy"))
+        {
+            // Objeyi sayımdan düşmesi için hafızadan hemen siliyoruz
+            Destroy(gameObject);
+
+            // Sahnede aktif kalan tüm diğer düşmanları buluyoruz
+            GameObject[] remainingEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            // Eğer kalan düşman sayısı 1 veya daha az ise (yani şu an ölen bu son düşmansa) zafer ekranını aç
+            if (remainingEnemies.Length <= 1 && winManager != null)
+            {
+                winManager.ShowGameWin();
+            }
+            return; // Objeyi zaten yok ettiğimiz için alt satırlara inmeden fonksiyonu bitiriyoruz
+        }
+        // -----------------------------------------------------
 
         if (gameObject.CompareTag("Cat") && gameManager != null)
             gameManager.ShowGameOver();
